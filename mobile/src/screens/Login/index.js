@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container } from './styles';
+import { Container, LogoContainer,ForgotText,ForgotPass,Input,InputsContainer,LoginButton,RegisterButton,TextButton } from './styles';
 
 export default function Login() {
   return (
