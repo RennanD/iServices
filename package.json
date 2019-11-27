@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "react-native-gesture-handler": "^1.5.1",
+    "react-native-vector-icons": "^6.6.0",
+    "react-navigation": "^4.0.10",
+    "reanimated": "^0.0.1-alpha",
+    "styled-components": "^4.4.1"
+  }
+}
