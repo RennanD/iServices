@@ -1,8 +1,3 @@
-node_modules
-*.lock
-.env
-telas
-
 # OSX
 #
 .DS_Store
@@ -33,6 +28,12 @@ build/
 .gradle
 local.properties
 *.iml
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
 
 # BUCK
 buck-out/
