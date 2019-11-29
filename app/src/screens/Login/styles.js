@@ -1,12 +1,12 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.KeyboardAvoidingView`
+export const Container = styled.View`
   flex: 1;
   background: #fefefe;
 `;
 
 export const LogoContainer = styled.View`
-  flex: 1;
+  height: 100px;
 `;
 
 export const InputsContainer = styled.View`
@@ -32,7 +32,7 @@ export const Input = styled.TextInput.attrs({
 export const LoginButton = styled.TouchableOpacity`
   width: 60%;
   align-self: center;
-  padding: 15px;
+  padding: 10px;
   background: #1976d2;
   align-items: center;
   justify-content: center;
@@ -48,7 +48,7 @@ export const TextButton = styled.Text`
 export const ForgotPass = styled.TouchableOpacity`
   border: none;
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
@@ -69,7 +69,7 @@ export const ForgotText = styled.Text`
 
 export const RegisterButton = styled.TouchableOpacity`
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   align-items: center;
   justify-content: center;
   background: #1976d2;

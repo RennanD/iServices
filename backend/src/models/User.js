@@ -31,8 +31,8 @@ const UserSchema = new Schema({
     required: true
   },
   number: {
-    type: Number,
-    required: true
+    type: String,
+    
   },
   neighborhood: {
     type: String,

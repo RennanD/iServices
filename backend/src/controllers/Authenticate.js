@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const config = require("../config/auth");
 
 function generateToken(params = {}) {
@@ -29,6 +29,7 @@ module.exports = {
     } = req.body;
 
     try {
+      
       if (await User.findOne({ cpf }))
         return res
           .status(400)
@@ -39,7 +40,9 @@ module.exports = {
           .json({ error: "Já Existe um usuario com este E-mail" });
       if (password !== passConfirm)
         return res.status(400).json({ error: "As senhas não conferem!" });
-      const hash = await bcrypt.hash(password, 16);
+      
+      const hash = bcrypt.hashSync(password, 16)
+     
       password = hash;
 
       const user = await User.create({
@@ -57,14 +60,15 @@ module.exports = {
         complement,
         documents
       });
-      password = undefined;
 
+      user.password = undefined;
+      
       return res.json({
         user,
         token: generateToken({ id: user._id })
       });
     } catch (err) {
-      console.log(err);
+      console.log(req.body);
 
       return res
         .status(400)
@@ -78,7 +82,7 @@ module.exports = {
     const user = await User.findOne({ email }).select("+password");
     if (!user)
       return res.status(400).json({ error: "Usuário não encontrado!" });
-    if (!(await bcrypt.compare(password, user.password)))
+    if (!(bcrypt.compareSync(password, user.password)))
       return res.status(400).json({ error: "Senha inválida!" });
     user.password = undefined;
 

@@ -1,14 +1,14 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.View`
   flex: 1;
   background: #fefefe;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
-export const Conntent = styled.KeyboardAvoidingView`
-  justify-content: space-around;
-  padding: 50px 20px;
+export const Conntent = styled.View`
+  justify-content: space-between;
+  padding:20px;
 `;
 export const Header = styled.View`
   height: 40px;
@@ -20,7 +20,7 @@ export const Title = styled.Text`
   font-size: 22px;
 `;
 export const Input = styled.TextInput`
-  padding: 15px;
+  padding: 7px;
   border-style: solid;
   border-color: #ddd;
   border-bottom-width: 2px;
@@ -39,20 +39,20 @@ export const RowInput = styled.View`
   justify-content: space-between;
 `;
 export const ButtonView = styled.View`
-  padding: 10px;
-  margin-top: 30px;
+  padding: 0 10px;
+  margin-top: 10px;
 `;
 export const RegisterButton = styled.TouchableOpacity`
-  margin-top: 10px;
+  margin-top: 7px;
   align-items: center;
   justify-content: center;
-  padding: 15px;
+  padding: 7px;
   border-radius: 7px;
   background: #1976d2;
 `;
 export const CancelButton = styled.TouchableOpacity`
   margin-top: 10px;
-  padding: 15px;
+  padding: 7px;
   border-radius: 7px;
   background: #dc3545;
   align-items: center;
