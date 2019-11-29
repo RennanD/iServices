@@ -47,7 +47,8 @@ const UserSchema = new Schema({
     required: true
   },
   complement: String,
-  documents: [String]
+  documents: [String],
+  attendances: [Object]
 });
 
 module.exports = model("User", UserSchema);
