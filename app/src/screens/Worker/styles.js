@@ -8,7 +8,7 @@ export const Container = styled.View`
 
 export const Conntent = styled.View`
   justify-content: space-between;
-  padding:20px;
+  padding: 20px;
 `;
 export const Header = styled.View`
   height: 40px;
@@ -65,12 +65,22 @@ export const TextButton = styled.Text`
 `;
 
 export const UploadButton = styled.TouchableOpacity`
-  margin-top: 7px;
+  margin-top: 10px;
   align-items: center;
   justify-content: center;
+  align-self: center;
+  width: 50%;
   padding: 7px;
   border-radius: 7px;
-  background: #7159c1; 
+  background: #28a745;
+`;
+export const TextUpload = styled.Text`
+  font-size: 14px;
+  font-weight: bold;
+  color: #fefefe;
+`;
 
-
-`
+export const PikerWork = styled.Picker`
+  height: 50px;
+  width: 100%;
+`;

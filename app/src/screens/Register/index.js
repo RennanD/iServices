@@ -13,6 +13,8 @@ import {
   TextButton,
   MeetInput,
   Conntent,
+  CPFInput,
+  PhoneInput,
 } from './styles';
 import api from '../../service/api';
 
@@ -43,7 +45,7 @@ export default function Register({navigation}) {
       await api.post('/auth/register', user);
 
       setLoad(!load);
-      navigate('Home');
+      navigate('HomeClient');
     } catch (error) {
       console.log(error);
       setLoad(false);
@@ -68,12 +70,19 @@ export default function Register({navigation}) {
             value={user.email}
             onChangeText={email => setUser({...user, email})}
           />
-          <Input
+          <PhoneInput
+            type={'cel-phone'}
+            options={{
+              maskType: 'BRL',
+              withDDD: true,
+              dddMask: '(99) ',
+            }}
             placeholder="Telefone"
             value={user.phone}
             onChangeText={phone => setUser({...user, phone})}
           />
-          <Input
+          <CPFInput
+            type={'cpf'}
             placeholder="Cpf"
             value={user.cpf}
             onChangeText={cpf => setUser({...user, cpf})}
@@ -89,7 +98,7 @@ export default function Register({navigation}) {
             <MeetInput
               placeholder="Confirmar"
               secureTextEntry
-              value={user.passConfim}
+              value={user.passConfirm}
               onChangeText={passConfirm => setUser({...user, passConfirm})}
             />
           </RowInput>

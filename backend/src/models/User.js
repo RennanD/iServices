@@ -31,8 +31,7 @@ const UserSchema = new Schema({
     required: true
   },
   number: {
-    type: String,
-    
+    type: String
   },
   neighborhood: {
     type: String,
@@ -46,7 +45,7 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  complement: String,
+  description: String,
   documents: [String],
   attendances: [Object]
 });

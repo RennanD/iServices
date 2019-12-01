@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {TextInputMask} from 'react-native-masked-text';
 
 export const Container = styled.View`
   flex: 1;
@@ -8,7 +9,7 @@ export const Container = styled.View`
 
 export const Conntent = styled.View`
   justify-content: space-between;
-  padding:20px;
+  padding: 20px;
 `;
 export const Header = styled.View`
   height: 40px;
@@ -20,6 +21,20 @@ export const Title = styled.Text`
   font-size: 22px;
 `;
 export const Input = styled.TextInput`
+  padding: 7px;
+  border-style: solid;
+  border-color: #ddd;
+  border-bottom-width: 2px;
+`;
+
+export const CPFInput = styled(TextInputMask)`
+  padding: 7px;
+  border-style: solid;
+  border-color: #ddd;
+  border-bottom-width: 2px;
+`;
+
+export const PhoneInput = styled(TextInputMask)`
   padding: 7px;
   border-style: solid;
   border-color: #ddd;

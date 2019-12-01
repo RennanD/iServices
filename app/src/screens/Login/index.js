@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { ActivityIndicator } from 'react-native'
+import {ActivityIndicator} from 'react-native';
 
 import {
   Container,
@@ -22,7 +22,7 @@ export default function Login({navigation}) {
     password: '',
   });
   const [error, setError] = useState();
-  const [load, setLoad] = useState(false)
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -31,17 +31,22 @@ export default function Login({navigation}) {
   }, [error]);
 
   async function handleLogin() {
-    setLoad(!load)
+    setLoad(!load);
     try {
-      await api.post('/auth/login', {
+      const response = await api.post('/auth/login', {
         email: user.email,
         password: user.password,
       });
-      setLoad(!load)
-      navigate('Home');
-    } catch (response) {
-      setLoad(false)
+      console.log(response.data);
+
+      const {user: loggedUser} = response.data;
+      setLoad(!load);
+      if (loggedUser.typeUser === 'Client') return navigate('HomeClient');
+      if (user.typeUser === 'Worker') navigate('HomeWorker');
+    } catch (error) {
+      setLoad(false);
       setError('Erro');
+      console.log(error);
     }
   }
 
@@ -64,7 +69,11 @@ export default function Login({navigation}) {
         />
         {!!error && <Error>{error}</Error>}
         <LoginButton onPress={handleLogin}>
-          {load ? <ActivityIndicator color = "#fefefe" size = {22} /> : <TextButton>Entrar</TextButton>}
+          {load ? (
+            <ActivityIndicator color="#fefefe" size={22} />
+          ) : (
+            <TextButton>Entrar</TextButton>
+          )}
         </LoginButton>
 
         <ForgotPass>
