@@ -3,18 +3,21 @@ const routes = require("express").Router();
 const Authenticate = require("./controllers/Authenticate");
 const SetWork = require("./controllers/SetWorker");
 const ChatController = require("./controllers/ChatController");
+const Profile = require("./controllers/Profile");
 
 routes.post("/auth/register", Authenticate.register);
 routes.post("/auth/login", Authenticate.authetication);
 
-routes.get("/profile/:id");
+routes.get("/profile/:user_id", Profile.show);
 
 routes.get("/works/", SetWork.index);
 routes.get("/works/:id", SetWork.show);
 routes.post("/works", SetWork.store);
 routes.post("/works/:id/user", SetWork.storeWorker);
 
+routes.get("/chats/:logged/user", ChatController.listChats);
+routes.get("/chats/:chat_id", ChatController.showChat);
 routes.post("/chats", ChatController.storeChat);
-routes.get("./chats/:id/messeges", ChatController.storeMessege);
+routes.post("/chats/:id/messeges", ChatController.storeMessege);
 
 module.exports = routes;

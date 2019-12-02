@@ -24,12 +24,11 @@ module.exports = {
       neighborhood,
       city,
       zipcode,
-      complement,
+      description,
       documents
     } = req.body;
 
     try {
-      
       if (await User.findOne({ cpf }))
         return res
           .status(400)
@@ -40,9 +39,9 @@ module.exports = {
           .json({ error: "Já Existe um usuario com este E-mail" });
       if (password !== passConfirm)
         return res.status(400).json({ error: "As senhas não conferem!" });
-      
-      const hash = bcrypt.hashSync(password, 16)
-     
+
+      const hash = bcrypt.hashSync(password, 16);
+
       password = hash;
 
       const user = await User.create({
@@ -57,12 +56,12 @@ module.exports = {
         neighborhood,
         city,
         zipcode,
-        complement,
+        description,
         documents
       });
 
       user.password = undefined;
-      
+
       return res.json({
         user,
         token: generateToken({ id: user._id })
@@ -82,7 +81,7 @@ module.exports = {
     const user = await User.findOne({ email }).select("+password");
     if (!user)
       return res.status(400).json({ error: "Usuário não encontrado!" });
-    if (!(bcrypt.compareSync(password, user.password)))
+    if (!bcrypt.compareSync(password, user.password))
       return res.status(400).json({ error: "Senha inválida!" });
     user.password = undefined;
 

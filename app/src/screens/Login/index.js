@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {ActivityIndicator} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {
   Container,
@@ -38,8 +39,9 @@ export default function Login({navigation}) {
         password: user.password,
       });
       console.log(response.data);
-
       const {user: loggedUser} = response.data;
+      console.log(loggedUser);
+      await AsyncStorage.setItem('logged', loggedUser._id);
       setLoad(!load);
       if (loggedUser.typeUser === 'Client') return navigate('HomeClient');
       if (user.typeUser === 'Worker') navigate('HomeWorker');

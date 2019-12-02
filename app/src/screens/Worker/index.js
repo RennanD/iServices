@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {ActivityIndicator} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+
 import api from '../../service/api';
 import {
   Container,
@@ -18,12 +20,14 @@ import {
   PikerWork,
 } from './styles';
 
+import {CPFInput, PhoneInput} from '../Register/styles';
+
 export default function Worker({navigation}) {
   const {navigate} = navigation;
   const [advance, setAdvance] = useState(false);
   const [workAt, setWorkAt] = useState();
   const [works, setWorks] = useState([]);
-  const [workSelect, setWorkSelect] = useState();
+  const [workSelect, setWorkSelect] = useState('Selecione uma categoria');
   const [load, setLoad] = useState(false);
   const [user, setUser] = useState({
     name: '',
@@ -71,7 +75,7 @@ export default function Worker({navigation}) {
       await api.post(`/works/${workAt}/user`, {
         user_id: response.data.user._id,
       });
-
+      await AsyncStorage.setItem('logged', response.data.user._id);
       setLoad(!load);
       navigate('HomeWorker');
     } catch (error) {
@@ -103,12 +107,19 @@ export default function Worker({navigation}) {
             value={user.email}
             onChangeText={email => setUser({...user, email})}
           />
-          <Input
+          <PhoneInput
+            type={'cel-phone'}
+            options={{
+              maskType: 'BRL',
+              withDDD: true,
+              dddMask: '(99) ',
+            }}
             placeholder="Telefone"
             value={user.phone}
             onChangeText={phone => setUser({...user, phone})}
           />
-          <Input
+          <CPFInput
+            type={'cpf'}
             placeholder="Cpf"
             value={user.cpf}
             onChangeText={cpf => setUser({...user, cpf})}
@@ -185,7 +196,7 @@ export default function Worker({navigation}) {
               ))}
           </PikerWork>
           <Input
-            placeholder="CEP"
+            placeholder="Descrição"
             value={user.description}
             onChangeText={description => setUser({...user, description})}
           />

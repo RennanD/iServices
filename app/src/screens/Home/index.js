@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Container, List, Card, CardText} from './styles';
+import {Container, List, Card, CardText, BackButton} from './styles';
 import {Header, Title} from '../Register/styles';
 import api from '../../service/api';
 
@@ -27,10 +27,6 @@ export default function Home({navigation}) {
 
   return (
     <Container>
-      <Header>
-        <Title>Tipo de serviço</Title>
-      </Header>
-
       <List
         data={works}
         keyExtractor={item => item.id}

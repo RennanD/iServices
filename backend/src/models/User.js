@@ -45,6 +45,12 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  activeChats: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    }
+  ],
   description: String,
   documents: [String],
   attendances: [Object]

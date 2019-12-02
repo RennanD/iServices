@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {ActivityIndicator} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {
   Container,
@@ -42,7 +43,9 @@ export default function Register({navigation}) {
 
     try {
       console.log(user);
-      await api.post('/auth/register', user);
+      const response = await api.post('/auth/register', user);
+
+      await AsyncStorage.setItem('logged', response.data.user._id);
 
       setLoad(!load);
       navigate('HomeClient');
