@@ -23,5 +23,10 @@ export const Card = styled.TouchableOpacity`
 
 export const CardText = styled.Text`
   color: #999;
-  font-size: 14px;
+  font-size: 13px;
+`;
+
+export const NameText = styled.Text`
+  color: #333;
+  font-size: 18px;
 `;

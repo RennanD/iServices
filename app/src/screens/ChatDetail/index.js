@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import socket from 'socket.io-client';
+import { formatDistance } from 'date-fns'
+import pt from 'date-fns/locale/pt-BR'
 
 import api from '../../service/api';
 import {
@@ -16,6 +17,7 @@ import {
   Header,
   FinishButton,
   FinishText,
+  DateMsg
 } from './styles';
 
 export default function ChatDetail({navigation}) {
@@ -30,7 +32,6 @@ export default function ChatDetail({navigation}) {
   useEffect(() => {
     async function loadUser() {
       setRealTime(!realtime);
-      const io = socket('http://10.0.3.2:3001');
       const logged = await AsyncStorage.getItem('logged');
       const response = await api.get(`/profile/${logged}`);
       const load = await api.get(`/chats/${chat_id}`);
@@ -58,8 +59,8 @@ export default function ChatDetail({navigation}) {
   }, [realtime]);
 
   async function handleSendMessege() {
-    const io = socket('http://10.0.3.2:3001');
-    const messegeObject = {author, newMessege, date: Date.now()};
+    
+    const messegeObject = {author, newMessege, date: new Date()};
     await api.post(`/chats/${chat_id}/messeges`, {
       messege: messegeObject,
     });
@@ -68,11 +69,14 @@ export default function ChatDetail({navigation}) {
   }
 
   function renderItens({item}) {
+
+    
+
     return (
       <MessegeContainer>
         <Author> {item.author} </Author>
         <Messege> {item.newMessege} </Messege>
-        <Messege> {item.date} </Messege>
+        <DateMsg> há { formatDistance(new Date(item.date), new Date(), {locate: pt} ) }</DateMsg>
       </MessegeContainer>
     );
   }

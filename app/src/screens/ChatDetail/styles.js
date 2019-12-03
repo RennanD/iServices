@@ -28,15 +28,21 @@ export const List = styled.FlatList.attrs({
 
 export const MessegeContainer = styled.View`
   height: 50px;
+  margin-bottom: 7px;
 `;
 
 export const Author = styled.Text`
-  font-size: 16px;
+  font-size: 20px;
   color: #222;
 `;
 
 export const Messege = styled.Text`
-  font-size: 14px;
+  font-size: 16px;
+  color: #666;
+`;
+
+export const DateMsg = styled.Text`
+  font-size: 13px;
   color: #666;
 `;
 

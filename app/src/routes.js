@@ -11,10 +11,26 @@ import Details from './screens/Details';
 import Chats from './screens/Chats';
 import ChatDetail from './screens/ChatDetail';
 import SplashScreen from './screens/SplashScreen'
+import Profile from './screens/Profile'
+
 
 const RegisterNav = createBottomTabNavigator({
   Cliente,
   Servico,
+},{
+  tabBarOptions: {
+    activeTintColor: '#fefefe',
+    inactiveTintColor:'#999',
+    labelStyle: {
+      fontSize: 16,
+      fontWeight: "bold",
+      alignItems: "center",
+      justifyContent:"center"
+    },
+    style: {
+      backgroundColor: '#1976d2',
+    },
+  }
 });
 
 const Home = createStackNavigator({
@@ -60,12 +76,67 @@ const ChatHome = createStackNavigator({
 });
 
 const HomeClient = createBottomTabNavigator({
-  Home,
-  ChatHome,
+  Home: {
+    screen: Home,
+    navigationOptions: () => ({
+      title: "Íníco"
+    })
+  },
+  ChatHome: {
+    screen: ChatHome,
+    navigationOptions: () => ({
+      title: "Bate-Papos"
+    })
+  },
+  Profile: {
+    screen: Profile,
+    navigationOptions: () => ({
+      title: "Perfil"
+    })
+  },
+},{
+  tabBarOptions: {
+    activeTintColor: '#fefefe',
+    inactiveTintColor:'#999',
+    labelStyle: {
+      fontSize: 16,
+      fontWeight: "bold",
+      alignItems: "center",
+      justifyContent:"center"
+    },
+    style: {
+      backgroundColor: '#1976d2',
+    },
+  }
 });
 
 const HomeWorker = createBottomTabNavigator({
-  Chats,
+  Chats: {
+    screen: Chats,
+    navigationOptions: () => ({
+      title: "Bate-Papos"
+    })
+  },
+  Profiles: {
+    screen: Profile,
+    navigationOptions: () => ({
+      title: "Perfil"
+    })
+  }
+},{
+  tabBarOptions: {
+    activeTintColor: '#fefefe',
+    inactiveTintColor:'#999',
+    labelStyle: {
+      fontSize: 16,
+      fontWeight: "bold",
+      alignItems: "center",
+      justifyContent:"center"
+    },
+    style: {
+      backgroundColor: '#1976d2',
+    },
+  }
 });
 
 const Routes = createAppContainer(

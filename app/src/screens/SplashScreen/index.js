@@ -17,6 +17,7 @@ export default function SplashScreen({navigation}) {
                 if(!logged) navigation.navigate('Login')
 
                 if(logged && type === 'Client') navigation.navigate('HomeClient')
+                if(logged && type === 'Worker') navigation.navigate('HomeWorker')
             }, 3000);
             
             

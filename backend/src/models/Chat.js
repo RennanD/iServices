@@ -8,6 +8,8 @@ const ChatSchema = new Schema({
     }
   ],
   messeges: [Object]
+},{
+  timestamps: true
 });
 
 module.exports = model("Chat", ChatSchema);

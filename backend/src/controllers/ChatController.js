@@ -35,7 +35,7 @@ module.exports = {
 
     const chats = await Chat.find({
       $and: [{ _id: { $in: loggedUser.activeChats } }]
-    });
+    }).populate('users').sort({createdAt: -1});
 
     return res.json(chats);
   },

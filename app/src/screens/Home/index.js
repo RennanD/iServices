@@ -12,7 +12,6 @@ export default function Home({navigation}) {
   useEffect(() => {
     async function loadWorks() {
 
-      await AsyncStorage.clear()
       const response = await api.get('/works');
 
       setWorks(response.data);
