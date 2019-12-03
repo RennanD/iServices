@@ -116,6 +116,7 @@ export default function Worker({navigation}) {
           <Input
             placeholder="E-mail"
             value={user.email}
+            autoCapitalize = "none"
             onChangeText={email => setUser({...user, email})}
           />
           <PhoneInput
@@ -140,12 +141,14 @@ export default function Worker({navigation}) {
             <MeetInput
               placeholder="Senha"
               secureTextEntry
+              autoCapitalize = "none"
               value={user.password}
               onChangeText={password => setUser({...user, password})}
             />
             <MeetInput
               placeholder="Confirmar"
               secureTextEntry
+              autoCapitalize = "none"
               value={user.passConfirm}
               onChangeText={passConfirm => setUser({...user, passConfirm})}
             />

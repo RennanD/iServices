@@ -28,7 +28,7 @@ export const List = styled.FlatList.attrs({
 
 export const MessegeContainer = styled.View`
   height: 50px;
-  margin-bottom: 7px;
+  margin-bottom: 20px;
 `;
 
 export const Author = styled.Text`

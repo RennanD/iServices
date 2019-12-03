@@ -83,6 +83,7 @@ export default function Register({navigation}) {
           />
           <Input
             placeholder="E-mail"
+            autoCapitalize = "none"
             value={user.email}
             onChangeText={email => setUser({...user, email})}
           />
@@ -108,12 +109,14 @@ export default function Register({navigation}) {
             <MeetInput
               placeholder="Senha"
               secureTextEntry
+              autoCapitalize = "none"
               value={user.password}
               onChangeText={password => setUser({...user, password})}
             />
             <MeetInput
               placeholder="Confirmar"
               secureTextEntry
+              autoCapitalize = "none"
               value={user.passConfirm}
               onChangeText={passConfirm => setUser({...user, passConfirm})}
             />
