@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Container, List, Card, CardText, BackButton} from './styles';
+import AsyncStorage from '@react-native-community/async-storage'
 import {Header, Title} from '../Register/styles';
 import api from '../../service/api';
 
@@ -10,6 +11,8 @@ export default function Home({navigation}) {
 
   useEffect(() => {
     async function loadWorks() {
+
+      await AsyncStorage.clear()
       const response = await api.get('/works');
 
       setWorks(response.data);
@@ -18,11 +21,13 @@ export default function Home({navigation}) {
   }, []);
 
   function renderItem({item}) {
-    return (
-      <Card onPress={() => navigate('ListWorker', {work_id: item._id})}>
-        <CardText>{item.name}</CardText>
-      </Card>
-    );
+    if(item.name !== "Selecione uma categoria"){
+      return (
+        <Card onPress={() => navigate('ListWorker', {work_id: item._id})}>
+          <CardText>{item.name}</CardText>
+        </Card>
+      );
+    }
   }
 
   return (

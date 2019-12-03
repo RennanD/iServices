@@ -20,13 +20,15 @@ import {
   PikerWork,
 } from './styles';
 
-import {CPFInput, PhoneInput} from '../Register/styles';
+import {CPFInput, PhoneInput, ZipCode, Info} from '../Register/styles';
+import { Error } from '../Login/styles';
 
 export default function Worker({navigation}) {
   const {navigate} = navigation;
   const [advance, setAdvance] = useState(false);
   const [workAt, setWorkAt] = useState();
   const [works, setWorks] = useState([]);
+  const [error, setError] = useState()
   const [workSelect, setWorkSelect] = useState('Selecione uma categoria');
   const [load, setLoad] = useState(false);
   const [user, setUser] = useState({
@@ -44,6 +46,12 @@ export default function Worker({navigation}) {
     typeUser: 'Worker',
     description: '',
   });
+
+  useEffect(() => {
+    setTimeout(() => {
+      setError('');
+    }, 5000);
+  }, [error]);
 
   useEffect(() => {
     async function loadWorks() {
@@ -65,22 +73,23 @@ export default function Worker({navigation}) {
     setLoad(!load);
 
     try {
-      console.log(user);
-      console.log(workAt);
+      
 
       const response = await api.post('/auth/register', user);
 
-      console.log();
+      
 
       await api.post(`/works/${workAt}/user`, {
         user_id: response.data.user._id,
       });
       await AsyncStorage.setItem('logged', response.data.user._id);
+      await AsyncStorage.setItem('type',response.data.user.typeUser);
       setLoad(!load);
       navigate('HomeWorker');
-    } catch (error) {
-      console.log(error);
+    } catch (response) {
       setLoad(false);
+
+      setError(response.data.error)
     }
   }
 
@@ -92,11 +101,13 @@ export default function Worker({navigation}) {
   return (
     <Container>
       <Header>
-        <Title>Cadastro</Title>
+        <Title>Prestador de Serviços</Title>
       </Header>
 
       {!advance ? (
         <Conntent>
+          <Info>Todos os campos são obrigatórios</Info>
+
           <Input
             placeholder="Nome"
             value={user.name}
@@ -151,6 +162,12 @@ export default function Worker({navigation}) {
       ) : (
         <Conntent>
           <Input
+            placeholder="Descrição"
+            value={user.description}
+            onChangeText={description => setUser({...user, description})}
+          />
+          <ZipCode
+            type ={'zip-code'}
             placeholder="CEP"
             value={user.zipcode}
             onChangeText={zipcode => setUser({...user, zipcode})}
@@ -195,18 +212,20 @@ export default function Worker({navigation}) {
                 />
               ))}
           </PikerWork>
-          <Input
-            placeholder="Descrição"
-            value={user.description}
-            onChangeText={description => setUser({...user, description})}
-          />
+          
           <ButtonView>
+
+                {!!error && <Error> {error} </Error>}
+
             <RegisterButton onPress={handleRegister}>
               {load ? (
                 <ActivityIndicator color="#fefefe" size={22} />
               ) : (
                 <TextButton>Cadastrar</TextButton>
               )}
+            </RegisterButton>
+            <RegisterButton onPress={() => setAdvance(false)}>
+              <TextButton>Voltar</TextButton>
             </RegisterButton>
             <CancelButton onPress={() => navigate('Login')}>
               <TextButton>Cancelar</TextButton>

@@ -20,6 +20,13 @@ export const Header = styled.View`
 export const Title = styled.Text`
   font-size: 22px;
 `;
+
+export const Info = styled.Text`
+  font-size: 17px;
+  text-align: center;
+  color: #666;
+`
+
 export const Input = styled.TextInput`
   padding: 7px;
   border-style: solid;
@@ -35,6 +42,13 @@ export const CPFInput = styled(TextInputMask)`
 `;
 
 export const PhoneInput = styled(TextInputMask)`
+  padding: 7px;
+  border-style: solid;
+  border-color: #ddd;
+  border-bottom-width: 2px;
+`;
+
+export const ZipCode = styled(TextInputMask)`
   padding: 7px;
   border-style: solid;
   border-color: #ddd;

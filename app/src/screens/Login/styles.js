@@ -55,7 +55,7 @@ export const ForgotPass = styled.TouchableOpacity`
 `;
 
 export const Error = styled.Text`
-  font-size: 22px;
+  font-size: 14px;
   color: #dc3545;
   margin: 10px;
   text-align: center;

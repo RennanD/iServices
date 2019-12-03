@@ -1,7 +1,11 @@
-import axios from 'axios';
+import apisauce from 'apisauce';
 
-const api = axios.create({
-  baseURL: 'http://192.168.25.8:3001',
+const api = apisauce.create({
+  baseURL: 'http://10.0.3.2:3001',
 });
+
+api.addResponseTransform(response =>{
+  if(!response.ok) throw response
+})
 
 export default api;

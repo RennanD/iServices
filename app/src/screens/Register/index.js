@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {ActivityIndicator} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -16,8 +16,11 @@ import {
   Conntent,
   CPFInput,
   PhoneInput,
+  ZipCode,
+  Info,
 } from './styles';
 import api from '../../service/api';
+import { Error } from '../Login/styles';
 
 export default function Register({navigation}) {
   const {navigate} = navigation;
@@ -37,6 +40,13 @@ export default function Register({navigation}) {
   });
   const [advance, setAdvance] = useState(false);
   const [load, setLoad] = useState(false);
+  const [error, setError] = useState()
+
+    useEffect(() => {
+      setTimeout(() => {
+        setError('');
+      }, 5000);
+    }, [error]);
 
   async function handleRegister() {
     setLoad(!load);
@@ -46,12 +56,14 @@ export default function Register({navigation}) {
       const response = await api.post('/auth/register', user);
 
       await AsyncStorage.setItem('logged', response.data.user._id);
+      await AsyncStorage.setItem('type',response.data.user.typeUser);
 
       setLoad(!load);
       navigate('HomeClient');
-    } catch (error) {
-      console.log(error);
+    } catch (response) {
+      
       setLoad(false);
+      setError(response.data.error)
     }
   }
 
@@ -63,6 +75,7 @@ export default function Register({navigation}) {
 
       {!advance ? (
         <Conntent>
+          <Info>Todos os campos são obrigatórios</Info>
           <Input
             placeholder="Nome"
             value={user.name}
@@ -116,7 +129,8 @@ export default function Register({navigation}) {
         </Conntent>
       ) : (
         <Conntent>
-          <Input
+          <ZipCode
+            type = {'zip-code'}
             placeholder="CEP"
             value={user.zipcode}
             onChangeText={zipcode => setUser({...user, zipcode})}
@@ -148,12 +162,18 @@ export default function Register({navigation}) {
             />
           </RowInput>
           <ButtonView>
+              
+            {!!error && <Error>{error}</Error>}
+            
             <RegisterButton onPress={handleRegister}>
               {load ? (
                 <ActivityIndicator color="#fefefe" size={22} />
               ) : (
                 <TextButton>Cadastrar</TextButton>
               )}
+            </RegisterButton>
+            <RegisterButton onPress={() => setAdvance(false)}>
+              <TextButton>Voltar</TextButton>
             </RegisterButton>
             <CancelButton onPress={() => navigate('Login')}>
               <TextButton>Cancelar</TextButton>

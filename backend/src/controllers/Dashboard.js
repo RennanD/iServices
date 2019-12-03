@@ -2,16 +2,13 @@ const User = require("../models/User");
 const Attendance = require("../models/Attendance");
 module.exports = {
   async storeAttendance(req, res) {
-    const { worker } = req.params;
-    const { user_id, day, schedule, scheduling, payment } = req.body;
+    //const { worker } = req.params;
+    const { day, schedule, payment } = req.body;
 
     try {
       const attendance = await Attendance.create({
-        worker,
-        user: user_id,
         day,
         schedule,
-        scheduling,
         payment
       });
 

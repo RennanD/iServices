@@ -69,3 +69,16 @@ export const TextButton = styled.Text`
   font-size: 14px;
   font-weight: bold;
 `;
+
+export const FinishButton = styled.TouchableOpacity`
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  
+
+`
+
+export const FinishText = styled.Text`
+  font-size: 16px;
+  color: #666;
+`

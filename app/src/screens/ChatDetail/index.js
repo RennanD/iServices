@@ -5,8 +5,6 @@ import socket from 'socket.io-client';
 import api from '../../service/api';
 import {
   Container,
-  Title,
-  Content,
   List,
   SendView,
   SendInput,
@@ -16,6 +14,8 @@ import {
   Author,
   Messege,
   Header,
+  FinishButton,
+  FinishText,
 } from './styles';
 
 export default function ChatDetail({navigation}) {
@@ -59,7 +59,7 @@ export default function ChatDetail({navigation}) {
 
   async function handleSendMessege() {
     const io = socket('http://10.0.3.2:3001');
-    const messegeObject = {author, newMessege};
+    const messegeObject = {author, newMessege, date: Date.now()};
     await api.post(`/chats/${chat_id}/messeges`, {
       messege: messegeObject,
     });
@@ -72,15 +72,13 @@ export default function ChatDetail({navigation}) {
       <MessegeContainer>
         <Author> {item.author} </Author>
         <Messege> {item.newMessege} </Messege>
+        <Messege> {item.date} </Messege>
       </MessegeContainer>
     );
   }
 
   return (
     <Container>
-      <Header>
-        <Title>Chat iniciado</Title>
-      </Header>
       <List
         data={messeges}
         keyExtractor={item => item.messege}

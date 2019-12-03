@@ -6,10 +6,11 @@ import Cliente from './screens/Register';
 import Inicio from './screens/Home';
 import Servico from './screens/Worker';
 import ListWorker from './screens/ListWorkers';
-import Perfil from './screens/Profile';
+import Attendance from './screens/Attendance';
 import Details from './screens/Details';
 import Chats from './screens/Chats';
 import ChatDetail from './screens/ChatDetail';
+import SplashScreen from './screens/SplashScreen'
 
 const RegisterNav = createBottomTabNavigator({
   Cliente,
@@ -38,23 +39,38 @@ const Home = createStackNavigator({
 });
 
 const ChatHome = createStackNavigator({
-  Chats,
-  ChatDetail,
+  Chats: {
+    screen: Chats,
+    navigationOptions: () => ({
+      title: "Chats ativos"
+    })
+  },
+  ChatDetail: {
+    screen: ChatDetail,
+    navigationOptions: () => ({
+      title: "Chat iniciado"
+    })
+  },
+  Attendance: {
+    screen: Attendance,
+    navigationOptions: () => ({
+      title: "Finalizar atendimento"
+    })
+  }
 });
 
 const HomeClient = createBottomTabNavigator({
   Home,
   ChatHome,
-  Perfil,
 });
 
 const HomeWorker = createBottomTabNavigator({
-  Perfil,
   Chats,
 });
 
 const Routes = createAppContainer(
   createSwitchNavigator({
+    SplashScreen,
     Login,
     RegisterNav,
     HomeClient,

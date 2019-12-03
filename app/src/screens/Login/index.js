@@ -42,13 +42,14 @@ export default function Login({navigation}) {
       const {user: loggedUser} = response.data;
       console.log(loggedUser);
       await AsyncStorage.setItem('logged', loggedUser._id);
+      await AsyncStorage.setItem('type',loggedUser.typeUser);
+
       setLoad(!load);
       if (loggedUser.typeUser === 'Client') return navigate('HomeClient');
-      if (user.typeUser === 'Worker') navigate('HomeWorker');
-    } catch (error) {
+      if (loggedUser.typeUser === 'Worker') navigate('HomeWorker');
+    } catch (response) {
       setLoad(false);
-      setError('Erro');
-      console.log(error);
+      setError(response.data.error);
     }
   }
 

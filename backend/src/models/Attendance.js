@@ -1,26 +1,12 @@
 const { model, Schema } = require("../database");
 
 const AttendanceSchema = new Schema({
-  woker: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true
-  },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true
-  },
   day: {
-    type: Date,
+    type: String,
     required: true
   },
   schedule: {
-    type: Date,
-    required: true
-  },
-  scheduling: {
-    type: Boolean,
+    type: String,
     required: true
   },
   payment: {
