@@ -53,7 +53,12 @@ const UserSchema = new Schema({
   ],
   description: String,
   documents: [String],
-  attendances: [Object]
+  attendances: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Attendance"
+    }
+  ]
 });
 
 module.exports = model("User", UserSchema);

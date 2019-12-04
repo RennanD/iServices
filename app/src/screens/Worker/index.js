@@ -21,14 +21,14 @@ import {
 } from './styles';
 
 import {CPFInput, PhoneInput, ZipCode, Info} from '../Register/styles';
-import { Error } from '../Login/styles';
+import {Error} from '../Login/styles';
 
 export default function Worker({navigation}) {
   const {navigate} = navigation;
   const [advance, setAdvance] = useState(false);
   const [workAt, setWorkAt] = useState();
   const [works, setWorks] = useState([]);
-  const [error, setError] = useState()
+  const [error, setError] = useState();
   const [workSelect, setWorkSelect] = useState('Selecione uma categoria');
   const [load, setLoad] = useState(false);
   const [user, setUser] = useState({
@@ -73,23 +73,19 @@ export default function Worker({navigation}) {
     setLoad(!load);
 
     try {
-      
-
       const response = await api.post('/auth/register', user);
-
-      
 
       await api.post(`/works/${workAt}/user`, {
         user_id: response.data.user._id,
       });
       await AsyncStorage.setItem('logged', response.data.user._id);
-      await AsyncStorage.setItem('type',response.data.user.typeUser);
+      await AsyncStorage.setItem('type', response.data.user.typeUser);
       setLoad(!load);
       navigate('HomeWorker');
     } catch (response) {
       setLoad(false);
 
-      setError(response.data.error)
+      setError(response.data.error);
     }
   }
 
@@ -100,12 +96,11 @@ export default function Worker({navigation}) {
 
   return (
     <Container>
-      <Header>
-        <Title>Prestador de Serviços</Title>
-      </Header>
+      <Header></Header>
 
       {!advance ? (
         <Conntent>
+          <Title>Cadastro de Prestador de Serviços</Title>
           <Info>Todos os campos são obrigatórios</Info>
 
           <Input
@@ -116,7 +111,7 @@ export default function Worker({navigation}) {
           <Input
             placeholder="E-mail"
             value={user.email}
-            autoCapitalize = "none"
+            autoCapitalize="none"
             onChangeText={email => setUser({...user, email})}
           />
           <PhoneInput
@@ -141,14 +136,14 @@ export default function Worker({navigation}) {
             <MeetInput
               placeholder="Senha"
               secureTextEntry
-              autoCapitalize = "none"
+              autoCapitalize="none"
               value={user.password}
               onChangeText={password => setUser({...user, password})}
             />
             <MeetInput
               placeholder="Confirmar"
               secureTextEntry
-              autoCapitalize = "none"
+              autoCapitalize="none"
               value={user.passConfirm}
               onChangeText={passConfirm => setUser({...user, passConfirm})}
             />
@@ -170,7 +165,7 @@ export default function Worker({navigation}) {
             onChangeText={description => setUser({...user, description})}
           />
           <ZipCode
-            type ={'zip-code'}
+            type={'zip-code'}
             placeholder="CEP"
             value={user.zipcode}
             onChangeText={zipcode => setUser({...user, zipcode})}
@@ -215,10 +210,9 @@ export default function Worker({navigation}) {
                 />
               ))}
           </PikerWork>
-          
-          <ButtonView>
 
-                {!!error && <Error> {error} </Error>}
+          <ButtonView>
+            {!!error && <Error> {error} </Error>}
 
             <RegisterButton onPress={handleRegister}>
               {load ? (

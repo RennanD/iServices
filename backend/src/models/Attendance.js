@@ -1,18 +1,30 @@
 const { model, Schema } = require("../database");
 
-const AttendanceSchema = new Schema({
-  day: {
-    type: String,
-    required: true
+const AttendanceSchema = new Schema(
+  {
+    desc: {
+      type: String,
+      required: true
+    },
+    day: {
+      type: String,
+      required: true
+    },
+    schedule: {
+      type: String,
+      required: true
+    },
+    payment: {
+      type: String,
+      required: true
+    },
+    completed: {
+      type: Boolean
+    }
   },
-  schedule: {
-    type: String,
-    required: true
-  },
-  payment: {
-    type: String,
-    required: true
+  {
+    timestamps: true
   }
-});
+);
 
 module.exports = model("Attendance", AttendanceSchema);

@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {ActivityIndicator} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -20,7 +20,7 @@ import {
   Info,
 } from './styles';
 import api from '../../service/api';
-import { Error } from '../Login/styles';
+import {Error} from '../Login/styles';
 
 export default function Register({navigation}) {
   const {navigate} = navigation;
@@ -40,13 +40,13 @@ export default function Register({navigation}) {
   });
   const [advance, setAdvance] = useState(false);
   const [load, setLoad] = useState(false);
-  const [error, setError] = useState()
+  const [error, setError] = useState();
 
-    useEffect(() => {
-      setTimeout(() => {
-        setError('');
-      }, 5000);
-    }, [error]);
+  useEffect(() => {
+    setTimeout(() => {
+      setError('');
+    }, 5000);
+  }, [error]);
 
   async function handleRegister() {
     setLoad(!load);
@@ -56,25 +56,21 @@ export default function Register({navigation}) {
       const response = await api.post('/auth/register', user);
 
       await AsyncStorage.setItem('logged', response.data.user._id);
-      await AsyncStorage.setItem('type',response.data.user.typeUser);
+      await AsyncStorage.setItem('type', response.data.user.typeUser);
 
       setLoad(!load);
       navigate('HomeClient');
     } catch (response) {
-      
       setLoad(false);
-      setError(response.data.error)
+      setError(response.data.error);
     }
   }
 
   return (
     <Container>
-      <Header>
-        <Title>Cliente</Title>
-      </Header>
-
       {!advance ? (
         <Conntent>
+          <Title>Cadastro de cliente</Title>
           <Info>Todos os campos são obrigatórios</Info>
           <Input
             placeholder="Nome"
@@ -83,7 +79,7 @@ export default function Register({navigation}) {
           />
           <Input
             placeholder="E-mail"
-            autoCapitalize = "none"
+            autoCapitalize="none"
             value={user.email}
             onChangeText={email => setUser({...user, email})}
           />
@@ -109,14 +105,14 @@ export default function Register({navigation}) {
             <MeetInput
               placeholder="Senha"
               secureTextEntry
-              autoCapitalize = "none"
+              autoCapitalize="none"
               value={user.password}
               onChangeText={password => setUser({...user, password})}
             />
             <MeetInput
               placeholder="Confirmar"
               secureTextEntry
-              autoCapitalize = "none"
+              autoCapitalize="none"
               value={user.passConfirm}
               onChangeText={passConfirm => setUser({...user, passConfirm})}
             />
@@ -133,7 +129,7 @@ export default function Register({navigation}) {
       ) : (
         <Conntent>
           <ZipCode
-            type = {'zip-code'}
+            type={'zip-code'}
             placeholder="CEP"
             value={user.zipcode}
             onChangeText={zipcode => setUser({...user, zipcode})}
@@ -165,9 +161,8 @@ export default function Register({navigation}) {
             />
           </RowInput>
           <ButtonView>
-              
             {!!error && <Error>{error}</Error>}
-            
+
             <RegisterButton onPress={handleRegister}>
               {load ? (
                 <ActivityIndicator color="#fefefe" size={22} />

@@ -42,18 +42,17 @@ export const Details = styled.Text`
   color: #999;
 `;
 export const ChatButton = styled.TouchableOpacity`
-  margin: 15px;
-  padding: 15px;
-  width: 50%;
-  align-self: center;
+  margin-top: 7px;
   align-items: center;
   justify-content: center;
+  padding: 10px;
   border-radius: 7px;
-  background: #28a745;
+  margin: 10px 15px;
+  background: #1976d2;
 `;
 
 export const TextButton = styled.Text`
-  font-size: 15px;
+  font-size: 20px;
   color: #fefefe;
   font-weight: bold;
 `;

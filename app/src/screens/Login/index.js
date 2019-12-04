@@ -42,7 +42,7 @@ export default function Login({navigation}) {
       const {user: loggedUser} = response.data;
       console.log(loggedUser);
       await AsyncStorage.setItem('logged', loggedUser._id);
-      await AsyncStorage.setItem('type',loggedUser.typeUser);
+      await AsyncStorage.setItem('type', loggedUser.typeUser);
 
       setLoad(!load);
       if (loggedUser.typeUser === 'Client') return navigate('HomeClient');
@@ -78,10 +78,6 @@ export default function Login({navigation}) {
             <TextButton>Entrar</TextButton>
           )}
         </LoginButton>
-
-        <ForgotPass>
-          <ForgotText>Esqueci minha senha.</ForgotText>
-        </ForgotPass>
 
         <RegisterButton onPress={() => navigate('RegisterNav')}>
           <TextButton>Cadastrar-se</TextButton>

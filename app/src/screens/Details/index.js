@@ -23,10 +23,8 @@ export default function Details({navigation}) {
   useEffect(() => {
     async function loadWorker() {
       const logged = await AsyncStorage.getItem('logged');
-      console.log(logged);
 
       const response = await api.get(`/profile/${worker_id}`);
-      console.log(response);
 
       setWorker(response.data);
     }
@@ -49,6 +47,10 @@ export default function Details({navigation}) {
     }
   }
 
+  function handleInitAttendance() {
+    navigate('Attendance', {worker_id});
+  }
+
   return (
     <Container>
       {worker ? (
@@ -65,12 +67,20 @@ export default function Details({navigation}) {
             </TextInfo>
           </PersonalInfo>
           <Professional>
-            <TextInfo>Avaliação geral: 9,9</TextInfo>
-            <TextInfo>Clientes atendidos: 60 </TextInfo>
+            <TextInfo>
+              Clientes atendidos: {worker.attendances.length}{' '}
+            </TextInfo>
           </Professional>
           <ChatButton onPress={handleInitChat}>
             {!load ? (
               <TextButton>Iniciar Chat</TextButton>
+            ) : (
+              <ActivityIndicator color="#fefefe" size={22} />
+            )}
+          </ChatButton>
+          <ChatButton onPress={handleInitAttendance}>
+            {!load ? (
+              <TextButton>Agender atendimeto</TextButton>
             ) : (
               <ActivityIndicator color="#fefefe" size={22} />
             )}
