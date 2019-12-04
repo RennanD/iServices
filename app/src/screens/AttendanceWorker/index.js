@@ -21,11 +21,10 @@ export default function AttendanceWorker({navigation}) {
     async function loadAttendances() {
       try {
         const logged = await AsyncStorage.getItem('logged');
-        console.log(logged);
+       ;
 
         const response = await api.get(`/attendances/${logged}`);
-        console.log(response);
-
+        
         setAttendances(response.data.attendances);
       } catch (err) {
         console.log(err);
@@ -39,7 +38,7 @@ export default function AttendanceWorker({navigation}) {
     if (!item.completed) {
       return (
         <Content>
-          <DetailCard>
+          <DetailCard onPress = {() => navigation.navigate('Complet',{attendance_id: item._id})} >
             <Title> {item.desc} </Title>
             <Desc>
               Agendado para o dia {item.day} às {item.schedule}{' '}

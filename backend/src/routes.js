@@ -24,5 +24,6 @@ routes.post("/chats/:id/messeges", ChatController.storeMessege);
 routes.post("/attendances", Dash.storeAttendance);
 routes.put("/attendances/:id", Dash.update);
 routes.get("/attendances/:id", Dash.show);
+routes.get("/attendances/:id/show", Dash.showAttendance);
 
 module.exports = routes;

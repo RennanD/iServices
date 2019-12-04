@@ -68,8 +68,10 @@ export default function Register({navigation}) {
 
   return (
     <Container>
+      <Header />
       {!advance ? (
         <Conntent>
+          
           <Title>Cadastro de cliente</Title>
           <Info>Todos os campos são obrigatórios</Info>
           <Input

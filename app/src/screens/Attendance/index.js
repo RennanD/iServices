@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
+import { ActivityIndicator } from 'react-native'
+
 import {
   Container,
   AgendButton,
@@ -13,7 +15,7 @@ import {
   Confirm,
 } from './styles';
 import api from '../../service/api';
-import {Input} from '../Login/styles';
+import {Input, Error} from '../Login/styles';
 
 export default function Attendance({navigation}) {
   const worker_id = navigation.getParam('worker_id');
@@ -24,11 +26,17 @@ export default function Attendance({navigation}) {
   const [desc, setDesc] = useState();
   const [completed, setCompleted] = useState(false);
   const [success, setSuccess] = useState();
+  const [load, setLoad] = useState(false)
+  const [error, setError] = useState()
 
   async function handleFinish() {
     const logged = await AsyncStorage.getItem('logged');
+    setLoad(true)
+    try {
+      console.log(worker_id, logged);
+    
 
-    await api.post('/attendance', {
+    await api.post('/attendances', {
       worker_id,
       logged,
       desc,
@@ -37,8 +45,13 @@ export default function Attendance({navigation}) {
       payment,
       completed,
     });
-
+    setLoad(false)
     setSuccess('Agendado com sucesso!');
+    } catch (response) {
+      setLoad(false)
+      setError(response.data.error)
+      
+    }
   }
 
   return (
@@ -86,8 +99,14 @@ export default function Attendance({navigation}) {
         <Payment.Item key="card" label="Cartão" value="Cartão" />
       </Payment>
       <Confirm onPress={handleFinish}>
-        <TextButton>Confirmar</TextButton>
+        {!load ? <TextButton>Confirmar</TextButton> : <ActivityIndicator color = "#fefefe" size = {22} />}
       </Confirm>
+
+      {!!error && (
+        <SuccessView>
+          <Error>{error}</Error>
+        </SuccessView>
+      )}
 
       {!!success && (
         <SuccessView>

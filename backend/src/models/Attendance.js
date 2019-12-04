@@ -2,6 +2,14 @@ const { model, Schema } = require("../database");
 
 const AttendanceSchema = new Schema(
   {
+    worker: {
+      type: String,
+      required: true
+    },
+    user: {
+      type:String,
+      required: true
+    },
     desc: {
       type: String,
       required: true

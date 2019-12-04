@@ -31,6 +31,8 @@ module.exports = {
 
     try {
       const attendance = await Attendance.create({
+        worker: worker.name,
+        user: user.name,
         desc,
         day,
         schedule,
@@ -45,8 +47,10 @@ module.exports = {
       worker.save();
 
       return res.json(attendance);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
+      
+      res.status(400).json({error: "Verifique se todos os campos estão preenchidos"})
     }
   },
 
@@ -60,5 +64,13 @@ module.exports = {
     });
 
     return res.json(attendance);
+  },
+
+  async showAttendance(req, res){
+    const { id } = req.params
+
+    const attendance = await Attendance.findById(id)
+
+    return res.json(attendance)
   }
 };

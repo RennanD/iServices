@@ -18,7 +18,8 @@ export const Header = styled.View`
   justify-content: center;
 `;
 export const Title = styled.Text`
-  font-size: 22px;
+  font-size: 20px;
+  text-align: center;
 `;
 
 export const Info = styled.Text`

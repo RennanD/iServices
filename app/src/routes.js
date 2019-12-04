@@ -13,6 +13,7 @@ import ChatDetail from './screens/ChatDetail';
 import SplashScreen from './screens/SplashScreen';
 import Profile from './screens/Profile';
 import AttendanceWorker from './screens/AttendanceWorker';
+import AttendanceClient from './screens/AttendanceClient';
 import Complet from './screens/Complet';
 
 const ListWorker = createStackNavigator({
@@ -108,19 +109,26 @@ const HomeClient = createBottomTabNavigator(
         title: 'Bate-Papos',
       }),
     },
+    AttendanceClient: {
+      screen: AttendanceClient,
+      navigationOptions: () => ({
+        title: "Atendimentos"
+      })
+    },
     Profile: {
       screen: Profile,
       navigationOptions: () => ({
         title: 'Perfil',
       }),
     },
+    
   },
   {
     tabBarOptions: {
       activeTintColor: '#fefefe',
       inactiveTintColor: '#999',
       labelStyle: {
-        fontSize: 16,
+        fontSize: 13,
         fontWeight: 'bold',
         alignItems: 'center',
         justifyContent: 'center',
