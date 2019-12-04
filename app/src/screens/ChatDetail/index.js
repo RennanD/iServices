@@ -17,7 +17,8 @@ import {
   Header,
   FinishButton,
   FinishText,
-  DateMsg
+  DateMsg,
+  MessegeAuthor
 } from './styles';
 
 export default function ChatDetail({navigation}) {
@@ -26,6 +27,7 @@ export default function ChatDetail({navigation}) {
   const [activeChat, setActiveChat] = useState();
   const [newMessege, setMessege] = useState();
   const [realtime, setRealTime] = useState(false);
+  const [user, setUSer] = useState()
 
   const chat_id = navigation.getParam('chat_id');
 
@@ -36,6 +38,7 @@ export default function ChatDetail({navigation}) {
       const response = await api.get(`/profile/${logged}`);
       const load = await api.get(`/chats/${chat_id}`);
 
+      setUSer(logged)
       setActiveChat(load.data);
       setAuthor(response.data.name);
       setMesseges(load.data.messeges);
@@ -72,12 +75,21 @@ export default function ChatDetail({navigation}) {
 
     
 
+    if(item.author !== author)
     return (
       <MessegeContainer>
         <Author> {item.author} </Author>
         <Messege> {item.newMessege} </Messege>
-        <DateMsg> há { formatDistance(new Date(item.date), new Date(), {locate: pt} ) }</DateMsg>
+        <DateMsg> to { formatDistance(new Date(item.date), new Date(), {locate: pt} ) }</DateMsg>
       </MessegeContainer>
+    );
+
+    if(item.author === author)
+    return (
+      <MessegeAuthor>
+        <Messege> {item.newMessege} </Messege>
+        <DateMsg> to { formatDistance(new Date(item.date), new Date(), {locate: pt} ) }</DateMsg>
+      </MessegeAuthor>
     );
   }
 
@@ -87,7 +99,7 @@ export default function ChatDetail({navigation}) {
         data={messeges}
         keyExtractor={item => item.messege}
         renderItem={renderItens}
-        inverted
+        
       />
 
       <SendView>

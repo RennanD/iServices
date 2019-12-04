@@ -24,6 +24,7 @@ export default function Attendance({navigation}) {
   const [schedule, setTime] = useState();
   const [payment, setPayment] = useState();
   const [desc, setDesc] = useState();
+  
   const [completed, setCompleted] = useState(false);
   const [success, setSuccess] = useState();
   const [load, setLoad] = useState(false)
@@ -45,8 +46,16 @@ export default function Attendance({navigation}) {
       payment,
       completed,
     });
+    setDay("")
+    setDesc("")
+    setPayment("Selecione uma forma pagamento")
+    setTime("")
     setLoad(false)
     setSuccess('Agendado com sucesso!');
+
+    setTimeout(() => {
+      setSuccess('')
+    }, 8000)
     } catch (response) {
       setLoad(false)
       setError(response.data.error)

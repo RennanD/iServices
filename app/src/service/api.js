@@ -1,7 +1,7 @@
 import apisauce from 'apisauce';
 
 const api = apisauce.create({
-  baseURL: 'http://10.0.3.2:3001',
+  baseURL: 'https://api-iservices.herokuapp.com',
 });
 
 api.addResponseTransform(response => {

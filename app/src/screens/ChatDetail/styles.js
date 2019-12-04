@@ -31,6 +31,12 @@ export const MessegeContainer = styled.View`
   margin-bottom: 20px;
 `;
 
+export const MessegeAuthor = styled.View`
+  height: 50px;
+  margin-bottom: 20px;
+  align-items: flex-end;
+`;
+
 export const Author = styled.Text`
   font-size: 20px;
   color: #222;

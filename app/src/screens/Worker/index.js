@@ -100,7 +100,7 @@ export default function Worker({navigation}) {
 
       {!advance ? (
         <Conntent>
-          <Title>Cadastro de Prestador de Serviços</Title>
+          <Title>Cadastro de prestador de serviços</Title>
           <Info>Todos os campos são obrigatórios</Info>
 
           <Input

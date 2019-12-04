@@ -80,7 +80,7 @@ export default function Details({navigation}) {
           </ChatButton>
           <ChatButton onPress={handleInitAttendance}>
             {!load ? (
-              <TextButton>Agender atendimeto</TextButton>
+              <TextButton>Agendar atendimeto</TextButton>
             ) : (
               <ActivityIndicator color="#fefefe" size={22} />
             )}
