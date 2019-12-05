@@ -44,10 +44,10 @@ export default function Chats({navigation}) {
     const target = item.users.find(t => t._id !== userLogged)
     
     return (
-      <Card onPress={() => navigate('ChatDetail', {chat_id: item._id})}>
+      <Card onPress={() => navigate('ChatDetail', {chat_id: item._id, worker_id: target._id})}>
         
         <NameText> {target.name} </NameText>
-        <CardText> Chat iniciado em:  {format(new Date(item.updatedAt), ' HH:mm dd-MM-yyyy ' )} </CardText>
+        <CardText> Chat iniciado em:  {format(new Date(item.updatedAt), ' HH:mm dd/MM/yyyy ' )} </CardText>
         
       </Card>
     );

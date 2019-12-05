@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+import { FlatList } from 'react-native'
 import { formatDistance } from 'date-fns'
-import pt from 'date-fns/locale/pt-BR'
+import { ptBR } from 'date-fns/locale'
 
 import api from '../../service/api';
 import {
@@ -22,12 +23,16 @@ import {
 } from './styles';
 
 export default function ChatDetail({navigation}) {
+
+  const worker_id = navigation.getParam("worker_id")
+
   const [messeges, setMesseges] = useState([]);
   const [author, setAuthor] = useState();
   const [activeChat, setActiveChat] = useState();
   const [newMessege, setMessege] = useState();
   const [realtime, setRealTime] = useState(false);
   const [user, setUSer] = useState()
+  const [type, setType] =  useState()
 
   const chat_id = navigation.getParam('chat_id');
 
@@ -40,9 +45,9 @@ export default function ChatDetail({navigation}) {
 
       setUSer(logged)
       setActiveChat(load.data);
+      setType(response.data.typeUser);
       setAuthor(response.data.name);
       setMesseges(load.data.messeges);
-      io.emit('connectChat', activeChat);
     }
     loadUser();
   }, []);
@@ -71,6 +76,10 @@ export default function ChatDetail({navigation}) {
     io.emit('sendMessege');
   }
 
+  function handleInitAttendance() {
+    navigation.navigate('Attendance', {worker_id});
+  }
+
   function renderItens({item}) {
 
     
@@ -80,7 +89,7 @@ export default function ChatDetail({navigation}) {
       <MessegeContainer>
         <Author> {item.author} </Author>
         <Messege> {item.newMessege} </Messege>
-        <DateMsg> to { formatDistance(new Date(item.date), new Date(), {locate: pt} ) }</DateMsg>
+        <DateMsg> há { formatDistance(new Date(item.date), new Date(), {locale: ptBR} ) }</DateMsg>
       </MessegeContainer>
     );
 
@@ -88,7 +97,7 @@ export default function ChatDetail({navigation}) {
     return (
       <MessegeAuthor>
         <Messege> {item.newMessege} </Messege>
-        <DateMsg> to { formatDistance(new Date(item.date), new Date(), {locate: pt} ) }</DateMsg>
+        <DateMsg> há { formatDistance(new Date(item.date), new Date(), {locale: ptBR} ) }</DateMsg>
       </MessegeAuthor>
     );
   }
@@ -96,6 +105,7 @@ export default function ChatDetail({navigation}) {
   return (
     <Container>
       <List
+        inverted = {false}
         data={messeges}
         keyExtractor={item => item.messege}
         renderItem={renderItens}
@@ -111,7 +121,13 @@ export default function ChatDetail({navigation}) {
         <SendButton onPress={handleSendMessege}>
           <TextButton>Enviar</TextButton>
         </SendButton>
+        
       </SendView>
+      { type === "Client" && (
+        <FinishButton onPress = {handleInitAttendance} >
+          <FinishText>Angendar</FinishText>
+        </FinishButton>
+      )}
     </Container>
   );
 }

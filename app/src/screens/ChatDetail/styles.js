@@ -24,7 +24,9 @@ export const List = styled.FlatList.attrs({
   contentContainerStyle: {
     padding: 15,
   },
-})``;
+})`
+  margin-bottom: 20px;
+`;
 
 export const MessegeContainer = styled.View`
   height: 50px;
@@ -83,14 +85,19 @@ export const TextButton = styled.Text`
 `;
 
 export const FinishButton = styled.TouchableOpacity`
-  padding: 20px;
+  padding: 7px;
   align-items: center;
   justify-content: center;
-  
+  background: #28a745;
+  width: 50%;
+  align-self: center;
+  margin-bottom: 5px;
+  border-radius: 7px;
 
 `
 
 export const FinishText = styled.Text`
   font-size: 16px;
-  color: #666;
+  color: #ffffff;
+  font-weight: bold;
 `

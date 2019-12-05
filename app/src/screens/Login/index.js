@@ -14,6 +14,9 @@ import {
   TextButton,
   Error,
 } from './styles';
+
+import { Red, Black } from '../SplashScreen/styles'
+
 import api from '../../service/api';
 
 export default function Login({navigation}) {
@@ -55,7 +58,10 @@ export default function Login({navigation}) {
 
   return (
     <Container behavior="padding">
-      <LogoContainer />
+      <LogoContainer>
+        <Red>i</Red>
+        <Black>Services</Black>
+      </LogoContainer>
       <InputsContainer>
         <Input
           placeholder="E-mail"

@@ -7,6 +7,9 @@ export const Container = styled.View`
 
 export const LogoContainer = styled.View`
   height: 100px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const InputsContainer = styled.View`

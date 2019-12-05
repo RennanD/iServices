@@ -47,10 +47,6 @@ export default function Details({navigation}) {
     }
   }
 
-  function handleInitAttendance() {
-    navigate('Attendance', {worker_id});
-  }
-
   return (
     <Container>
       {worker ? (
@@ -74,13 +70,6 @@ export default function Details({navigation}) {
           <ChatButton onPress={handleInitChat}>
             {!load ? (
               <TextButton>Iniciar Chat</TextButton>
-            ) : (
-              <ActivityIndicator color="#fefefe" size={22} />
-            )}
-          </ChatButton>
-          <ChatButton onPress={handleInitAttendance}>
-            {!load ? (
-              <TextButton>Agendar atendimeto</TextButton>
             ) : (
               <ActivityIndicator color="#fefefe" size={22} />
             )}

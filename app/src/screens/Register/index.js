@@ -66,6 +66,19 @@ export default function Register({navigation}) {
     }
   }
 
+  function handleAdvance() {
+    if(user.name && user.email) {
+      if(user.cpf && user.phone){
+        if(user.password && user.passConfirm){
+          setAdvance(true)
+        }
+      }
+    }
+    else {
+      setError("Preencha os campos em branco!")
+    }
+  }
+
   return (
     <Container>
       <Header />
@@ -119,8 +132,9 @@ export default function Register({navigation}) {
               onChangeText={passConfirm => setUser({...user, passConfirm})}
             />
           </RowInput>
+          { !!error && <Error> {error} </Error> }
           <ButtonView>
-            <RegisterButton onPress={() => setAdvance(true)}>
+            <RegisterButton onPress={handleAdvance}>
               <TextButton>Avançar</TextButton>
             </RegisterButton>
             <CancelButton onPress={() => navigate('Login')}>
