@@ -47,7 +47,7 @@ export default function Chats({navigation}) {
       <Card onPress={() => navigate('ChatDetail', {chat_id: item._id, worker_id: target._id})}>
         
         <NameText> {target.name} </NameText>
-        <CardText> Chat iniciado em:  {format(new Date(item.updatedAt), ' HH:mm dd/MM/yyyy ' )} </CardText>
+        <CardText> Chat iniciado em:  {format(new Date(item.updatedAt), ' dd/MM/yyyy HH:mm ' )} </CardText>
         
       </Card>
     );

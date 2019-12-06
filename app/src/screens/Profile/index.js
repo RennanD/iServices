@@ -43,6 +43,7 @@ export default function Profile({navigation}) {
                 </PersonalInfo>
                 <AddressView>
                     <AddressInfo>Endereço: {user.street},{user.number} - {user.neighborhood} </AddressInfo>
+                    <AddressInfo>Região: {user.city} - {user.region} </AddressInfo>
                     <AddressInfo>CEP: {user.zipcode} </AddressInfo>
                 </AddressView>
                 <LogoutButton onPress = {handleLogout} >

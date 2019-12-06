@@ -42,6 +42,7 @@ export default function Worker({navigation}) {
     city: '',
     neighborhood: '',
     number: '',
+    region:'',
     street: '',
     typeUser: 'Worker',
     description: '',
@@ -95,15 +96,30 @@ export default function Worker({navigation}) {
   }
 
   function handleAdvance() {
-    if(user.name && user.email) {
-      if(user.cpf && user.phone){
-        if(user.password && user.passConfirm){
-          setAdvance(true)
-        }
-      }
+    if(!user.name){
+      setError("Preencha o campo NOME")
     }
-    else {
-      setError("Preencha os campos em branco!")
+    else if(!user.email){
+      setError("Preencha o campo E-MAIL")
+    }
+    else if(!user.phone){
+      setError("Preencha o campo TELEFONE")
+      
+    }
+    else if(!user.cpf){
+      setError("Preencha o campo CPF")
+      
+    }
+    else if(!user.password){
+      setError("Preencha o campo SENHA")
+      
+    }
+    else if(!user.passConfirm){
+      setError("Preencha o campo CONFIRMAR SENHA")
+      
+    }
+    else{
+      setAdvance(true)
     }
   }
 
@@ -186,7 +202,11 @@ export default function Worker({navigation}) {
             value={user.zipcode}
             onChangeText={zipcode => setUser({...user, zipcode})}
           />
-
+          <Input 
+            placeholder = "Estado"
+            value = {user.region}
+            onChangeText = { region => setUser({...user, region}) }
+          />
           <RowInput>
             <MeetInput
               placeholder="Cidade"

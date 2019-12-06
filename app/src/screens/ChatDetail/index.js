@@ -19,7 +19,8 @@ import {
   FinishButton,
   FinishText,
   DateMsg,
-  MessegeAuthor
+  MessegeAuthor,
+  Content
 } from './styles';
 
 export default function ChatDetail({navigation}) {
@@ -104,13 +105,13 @@ export default function ChatDetail({navigation}) {
 
   return (
     <Container>
+      <Content>
       <List
-        inverted = {false}
         data={messeges}
         keyExtractor={item => item.messege}
         renderItem={renderItens}
-        
       />
+      </Content>
 
       <SendView>
         <SendInput

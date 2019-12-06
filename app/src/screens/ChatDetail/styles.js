@@ -18,6 +18,7 @@ export const Title = styled.Text`
 
 export const Content = styled.ScrollView`
   padding: 15px;
+  bottom: 0;
 `;
 
 export const List = styled.FlatList.attrs({

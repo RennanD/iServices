@@ -61,6 +61,7 @@ export default function Details({navigation}) {
               {' '}
               Endereço: {worker.street}, {worker.number}, {worker.neighborhood}{' '}
             </TextInfo>
+            <TextInfo> {worker.city} - {worker.region} </TextInfo>
           </PersonalInfo>
           <Professional>
             <TextInfo>
